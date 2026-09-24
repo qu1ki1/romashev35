@@ -14,35 +14,64 @@
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --milk:#FBF7F1;
-  --milk-2:#F3EBE0;
+  --milk:#F7EEDF;
+  --milk-2:#EFE2CE;
+  --paper:#FDFAF4;
   --ink:#1A1513;
   --ink-soft:#5B524C;
   --red:#A11428;
   --red-deep:#7C0E1E;
   --gold:#B9924B;
   --gold-soft:#DFC894;
-  --line:rgba(161,20,40,.22);
+  --line:rgba(161,20,40,.32);
   --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
   --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--milk);color:var(--ink);
+  margin:0;color:var(--ink);
+  background:
+    radial-gradient(900px 620px at 50% 0%, #FDFAF4 0%, rgba(253,250,244,0) 62%),
+    radial-gradient(700px 500px at 100% 88%, #F0E1C9 0%, rgba(240,225,201,0) 65%),
+    var(--milk);
+  background-attachment:fixed;
   font-family:var(--sans);font-weight:300;line-height:1.7;
   overflow-x:hidden;-webkit-tap-highlight-color:rgba(161,20,40,.12);
 }
 img,svg{max-width:100%}
 .tile{
-  position:fixed;inset:-10% 0 -10%;z-index:0;pointer-events:none;opacity:.055;will-change:transform;
-  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='none' stroke='%23A11428' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Ccircle cx='44' cy='44' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  position:fixed;inset:-10% 0 -10%;z-index:0;pointer-events:none;opacity:.17;will-change:transform;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='104' viewBox='0 0 104 104'%3E%3Cg fill='none' stroke='%23A11428' stroke-width='1'%3E%3Ccircle cx='52' cy='52' r='14'/%3E%3Ccircle cx='52' cy='52' r='27' stroke-dasharray='3 6'/%3E%3Crect x='34' y='34' width='36' height='36' transform='rotate(45 52 52)'/%3E%3Cpath d='M52 42c4.5 5.5 6.5 9 6.5 12a6.5 6.5 0 0 1-13 0c0-3 2-6.5 6.5-12z'/%3E%3Cpath d='M0 0h104M0 104h104M0 0v104M104 0v104' opacity='.3'/%3E%3Ccircle cx='0' cy='0' r='6'/%3E%3Ccircle cx='104' cy='0' r='6'/%3E%3Ccircle cx='0' cy='104' r='6'/%3E%3Ccircle cx='104' cy='104' r='6'/%3E%3C/g%3E%3C/svg%3E");
 }
+
+/* ===== ковровые полосы (килим) ===== */
+.kilim{
+  height:30px;margin:0 auto;
+  background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='30' viewBox='0 0 72 30'%3E%3Cg fill='none' stroke-width='1.3'%3E%3Cpath d='M0 3.5h72M0 26.5h72' stroke='%2316100F' opacity='.5'/%3E%3Cpath d='M36 7l11 8-11 8-11-8z' stroke='%23A11428'/%3E%3Cpath d='M36 11l5.5 4-5.5 4-5.5-4z' fill='%23B9924B' stroke='none'/%3E%3Cpath d='M0 7l11 8-11 8M72 7l-11 8 11 8' stroke='%23A11428'/%3E%3Cpath d='M17 15h-4M59 15h-4' stroke='%2316100F' opacity='.45'/%3E%3C/g%3E%3C/svg%3E") repeat-x center;
+  background-size:auto 30px;opacity:.85;
+}
+.kilim.dark{
+  opacity:.9;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='30' viewBox='0 0 72 30'%3E%3Cg fill='none' stroke-width='1.3'%3E%3Cpath d='M0 3.5h72M0 26.5h72' stroke='%23DFC894' opacity='.45'/%3E%3Cpath d='M36 7l11 8-11 8-11-8z' stroke='%23DFC894' opacity='.8'/%3E%3Cpath d='M36 11l5.5 4-5.5 4-5.5-4z' fill='%23A11428' stroke='none'/%3E%3Cpath d='M0 7l11 8-11 8M72 7l-11 8 11 8' stroke='%23DFC894' opacity='.7'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ===== фонарики ===== */
+.lanterns{position:absolute;top:0;left:0;right:0;height:0;z-index:5;pointer-events:none}
+.lamp{position:absolute;top:0;transform-origin:50% 0;animation:sway 5.4s ease-in-out infinite}
+.lamp svg{width:100%;height:auto;display:block}
+.lamp .glow{filter:blur(9px);animation:glow 3.6s ease-in-out infinite}
+.l1{left:2%;width:40px}
+.l2{right:3%;width:32px;animation-duration:6.6s;animation-delay:.7s}
+.l3{left:21%;width:25px;opacity:.72;animation-duration:7.6s;animation-delay:1.5s}
+.l4{right:22%;width:22px;opacity:.6;animation-duration:8.4s;animation-delay:2.3s}
+@keyframes sway{0%,100%{transform:rotate(-3.4deg)}50%{transform:rotate(3.4deg)}}
+@keyframes glow{0%,100%{opacity:.22}50%{opacity:.5}}
 .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 20px 40px}
 
 /* ===== curtain intro ===== */
 .curtain{
-  position:fixed;inset:0;z-index:120;background:var(--milk);
+  position:fixed;inset:0;z-index:120;background:linear-gradient(180deg,#FDFAF4,#F0E1C9);
   display:flex;align-items:center;justify-content:center;flex-direction:column;
   transition:transform 1s cubic-bezier(.76,0,.24,1),opacity .6s ease .4s;
 }
@@ -56,6 +85,14 @@ img,svg{max-width:100%}
 .curtain .c-sub{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--red);margin-top:10px;opacity:0;animation:fadeUp .9s ease 1s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ===== рамка-паспарту ===== */
+.passe{
+  position:fixed;z-index:3;pointer-events:none;
+  top:calc(9px + env(safe-area-inset-top,0px));bottom:calc(9px + env(safe-area-inset-bottom,0px));left:9px;right:9px;
+  border:1px solid rgba(185,146,75,.5);
+  box-shadow:inset 0 0 0 4px rgba(247,238,223,.55), inset 0 0 0 5px rgba(161,20,40,.16);
+}
 
 /* ===== typography ===== */
 h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0}
@@ -127,14 +164,20 @@ body.go .arch-shot{opacity:0;animation:archIn 1.5s cubic-bezier(.22,.9,.3,1) .42
 .body-copy{max-width:50ch;margin:0 auto;text-align:center;font-size:16px;color:var(--ink-soft)}
 
 /* ===== program ===== */
-.prog{border-top:1px solid var(--line)}
+.prog{border-top:1px solid var(--line);background:rgba(253,250,244,.78);padding:0 16px;
+  box-shadow:0 10px 30px rgba(26,21,19,.04)}
 .prog article{
   padding:28px 4px;border-bottom:1px solid var(--line);
   display:grid;grid-template-columns:54px 1fr;gap:4px 16px;align-items:start;
   transition:background .35s ease,padding-left .35s ease;
 }
 .prog article:hover{background:rgba(161,20,40,.035)}
-.prog .num{font-family:var(--serif);font-size:36px;line-height:1;color:var(--red);opacity:.5}
+.prog .num{
+  position:relative;width:56px;height:56px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:24px;line-height:1;color:var(--red);
+}
+.prog .num::before{content:"";position:absolute;inset:0;border:1px solid var(--line);border-radius:50%}
+.prog .num::after{content:"";position:absolute;inset:9px;border:1px solid rgba(185,146,75,.55);transform:rotate(45deg)}
 .prog h3{font-size:26px;line-height:1.2}
 .prog p{grid-column:2;margin:8px 0 0;font-size:15.5px;color:var(--ink-soft)}
 
@@ -177,16 +220,29 @@ body.go .arch-shot{opacity:0;animation:archIn 1.5s cubic-bezier(.22,.9,.3,1) .42
 .dress{text-align:center}
 .swatch{display:flex;justify-content:center;margin:26px 0 20px}
 .swatch div{
-  width:min(120px,34vw);height:min(120px,34vw);display:flex;align-items:flex-end;justify-content:center;
+  position:relative;overflow:hidden;
+  width:min(122px,34vw);height:min(122px,34vw);display:flex;align-items:flex-end;justify-content:center;
   padding-bottom:11px;font-size:10px;letter-spacing:.2em;font-weight:600;
   transition:transform .4s cubic-bezier(.22,.9,.3,1);
+}
+.swatch div span{position:relative;z-index:1}
+.swatch div::after{
+  content:"";position:absolute;inset:0;opacity:.4;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Cg fill='none' stroke='%23DFC894' stroke-width='1'%3E%3Ccircle cx='26' cy='26' r='8'/%3E%3Crect x='14' y='14' width='24' height='24' transform='rotate(45 26 26)'/%3E%3Cpath d='M26 20c3 3.6 4.4 6 4.4 8a4.4 4.4 0 0 1-8.8 0c0-2 1.4-4.4 4.4-8z'/%3E%3C/g%3E%3C/svg%3E");
 }
 .swatch div:hover{transform:translateY(-7px)}
 .sw-red{background:var(--red);color:#fff}
 .sw-black{background:#16100F;color:#fff}
 
 /* ===== frames ===== */
-.frame{border:1px solid var(--line);padding:32px 22px;text-align:center}
+.frame{position:relative;border:1px solid var(--line);padding:34px 22px;text-align:center;
+  background:rgba(253,250,244,.86);box-shadow:0 10px 30px rgba(26,21,19,.05)}
+.frame::before,.frame::after{
+  content:"";position:absolute;width:13px;height:13px;
+  border:1px solid var(--gold);background:var(--milk);transform:rotate(45deg);
+}
+.frame::before{left:-7px;top:-7px;background:var(--paper)}
+.frame::after{right:-7px;bottom:-7px;background:var(--paper)}
 .frame .big{font-family:var(--serif);font-size:clamp(24px,5.6vw,32px);line-height:1.3;margin:0 0 4px}
 .where-grid>div{padding:18px 0;border-bottom:1px solid var(--line)}
 .where-grid>div:last-child{border-bottom:0}
@@ -215,7 +271,8 @@ body.go .arch-shot{opacity:0;animation:archIn 1.5s cubic-bezier(.22,.9,.3,1) .42
 .btn[disabled]{opacity:.6;cursor:default}
 
 /* ===== form ===== */
-.form-card{border:1px solid var(--line);padding:32px 22px}
+.form-card{border:1px solid var(--line);padding:32px 22px;
+  background:rgba(253,250,244,.9);box-shadow:0 10px 30px rgba(26,21,19,.05)}
 .field{margin-bottom:22px}
 label{display:block;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:9px}
 input,textarea{
@@ -259,6 +316,10 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
   .form-card{padding:42px 36px}
   .gift{padding:64px 34px 54px}
 }
+@media(max-width:520px){
+  .l3,.l4{display:none}
+  .kilim{height:24px;background-size:auto 24px}
+}
 @media(max-width:400px){
   .wrap{padding-left:17px;padding-right:17px}
   .prog article{grid-template-columns:42px 1fr;gap:4px 12px}
@@ -269,6 +330,8 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .gull,.gift::after,.scroll-cue{display:none}
+  .lamp{animation:none}
+  .lamp .glow{animation:none;opacity:.3}
   .fade{opacity:1;transform:none;transition:none}
   .anim,.incl li{opacity:1;animation:none!important}
   .curtain{display:none}
@@ -289,11 +352,20 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
 </div>
 
 <div class="tile" id="tile" aria-hidden="true"></div>
+<div class="passe" aria-hidden="true"></div>
 
 <div class="wrap">
 
+<div class="kilim anim a1" style="margin-bottom:8px"></div>
+
 <!-- ================= HERO ================= -->
 <header class="hero">
+  <div class="lanterns" aria-hidden="true">
+    <span class="lamp l1"><svg viewBox="0 0 44 108" fill="none"><path d="M22 0v16" stroke="#B9924B" stroke-width="1.2"/><circle class="glow" cx="22" cy="50" r="24" fill="#D9A23C"/><path d="M15 17h14l-2.5 6h-9z" fill="#B9924B"/><path d="M22 23c12 6 15.5 20 15.5 27.5C37.5 61 30 68.5 22 74c-8-5.5-15.5-13-15.5-23.5C6.5 43 10 29 22 23z" fill="#A11428" fill-opacity=".88" stroke="#B9924B" stroke-width="1.3"/><path d="M22 33l6.5 8.5L22 50l-6.5-8.5z" fill="#DFC894" opacity=".55"/><path d="M12.5 44h4.5M27 44h4.5" stroke="#DFC894" stroke-width="1" opacity=".5"/><path d="M22 74v8" stroke="#B9924B" stroke-width="1.2"/><circle cx="22" cy="85" r="3" fill="#B9924B"/><path d="M22 88v7" stroke="#A11428" stroke-width="1" opacity=".6"/></svg></span>
+    <span class="lamp l2"><svg viewBox="0 0 44 108" fill="none"><path d="M22 0v16" stroke="#B9924B" stroke-width="1.2"/><circle class="glow" cx="22" cy="50" r="24" fill="#D9A23C"/><path d="M15 17h14l-2.5 6h-9z" fill="#B9924B"/><path d="M22 23c12 6 15.5 20 15.5 27.5C37.5 61 30 68.5 22 74c-8-5.5-15.5-13-15.5-23.5C6.5 43 10 29 22 23z" fill="#A11428" fill-opacity=".88" stroke="#B9924B" stroke-width="1.3"/><path d="M22 33l6.5 8.5L22 50l-6.5-8.5z" fill="#DFC894" opacity=".55"/><path d="M12.5 44h4.5M27 44h4.5" stroke="#DFC894" stroke-width="1" opacity=".5"/><path d="M22 74v8" stroke="#B9924B" stroke-width="1.2"/><circle cx="22" cy="85" r="3" fill="#B9924B"/><path d="M22 88v7" stroke="#A11428" stroke-width="1" opacity=".6"/></svg></span>
+    <span class="lamp l3"><svg viewBox="0 0 44 108" fill="none"><path d="M22 0v16" stroke="#B9924B" stroke-width="1.2"/><circle class="glow" cx="22" cy="50" r="24" fill="#D9A23C"/><path d="M15 17h14l-2.5 6h-9z" fill="#B9924B"/><path d="M22 23c12 6 15.5 20 15.5 27.5C37.5 61 30 68.5 22 74c-8-5.5-15.5-13-15.5-23.5C6.5 43 10 29 22 23z" fill="#A11428" fill-opacity=".88" stroke="#B9924B" stroke-width="1.3"/><path d="M22 33l6.5 8.5L22 50l-6.5-8.5z" fill="#DFC894" opacity=".55"/><path d="M12.5 44h4.5M27 44h4.5" stroke="#DFC894" stroke-width="1" opacity=".5"/><path d="M22 74v8" stroke="#B9924B" stroke-width="1.2"/><circle cx="22" cy="85" r="3" fill="#B9924B"/><path d="M22 88v7" stroke="#A11428" stroke-width="1" opacity=".6"/></svg></span>
+    <span class="lamp l4"><svg viewBox="0 0 44 108" fill="none"><path d="M22 0v16" stroke="#B9924B" stroke-width="1.2"/><circle class="glow" cx="22" cy="50" r="24" fill="#D9A23C"/><path d="M15 17h14l-2.5 6h-9z" fill="#B9924B"/><path d="M22 23c12 6 15.5 20 15.5 27.5C37.5 61 30 68.5 22 74c-8-5.5-15.5-13-15.5-23.5C6.5 43 10 29 22 23z" fill="#A11428" fill-opacity=".88" stroke="#B9924B" stroke-width="1.3"/><path d="M22 33l6.5 8.5L22 50l-6.5-8.5z" fill="#DFC894" opacity=".55"/><path d="M12.5 44h4.5M27 44h4.5" stroke="#DFC894" stroke-width="1" opacity=".5"/><path d="M22 74v8" stroke="#B9924B" stroke-width="1.2"/><circle cx="22" cy="85" r="3" fill="#B9924B"/><path d="M22 88v7" stroke="#A11428" stroke-width="1" opacity=".6"/></svg></span>
+  </div>
   <div class="sky" aria-hidden="true">
     <span class="gull g1"><i><svg viewBox="0 0 60 26" fill="none"><g class="wl"><path d="M30 15C24.5 6.5 16 4 5 6.5c8.5 2.5 15 7 25 10.5z" fill="#3A3430"/></g><g class="wr"><path d="M30 15c5.5-8.5 14-11 25-8.5-8.5 2.5-15 7-25 10.5z" fill="#3A3430"/></g></svg></i></span>
     <span class="gull g2"><i><svg viewBox="0 0 60 26" fill="none"><g class="wl"><path d="M30 15C24.5 6.5 16 4 5 6.5c8.5 2.5 15 7 25 10.5z" fill="#3A3430"/></g><g class="wr"><path d="M30 15c5.5-8.5 14-11 25-8.5-8.5 2.5-15 7-25 10.5z" fill="#3A3430"/></g></svg></i></span>
@@ -373,6 +445,7 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
 <!-- ================= GIFT ================= -->
 <section class="fade">
   <div class="gift">
+    <div class="kilim dark" style="margin-bottom:26px"></div>
     <div class="kicker">Главный подарок вечера</div>
     <h2>Путешествие<br>в Турцию на двоих</h2>
     <span class="flag">🇹🇷</span>
@@ -386,18 +459,20 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
       <li>Трансферы по экскурсионным маршрутам</li>
     </ul>
     <p class="note">Туристический ваучер разыграем среди гостей вечера.<br>Победители сами выберут дату поездки.</p>
+    <div class="kilim dark" style="margin-top:26px"></div>
   </div>
 </section>
 
 <!-- ================= DRESS ================= -->
 <section class="fade dress">
+  <div class="kilim" style="margin-bottom:26px"></div>
   <div class="sec-head">
     <div class="kicker">Dress code</div>
     <h2>Red / Black</h2>
   </div>
   <div class="swatch">
-    <div class="sw-red">КРАСНЫЙ</div>
-    <div class="sw-black">ЧЁРНЫЙ</div>
+    <div class="sw-red"><span>КРАСНЫЙ</span></div>
+    <div class="sw-black"><span>ЧЁРНЫЙ</span></div>
   </div>
   <p class="body-copy">Можно выбрать один цвет или сочетать оба.<br>Главное — поддержать атмосферу вечера.</p>
 </section>
@@ -422,7 +497,7 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
       <div><div class="lbl">Сбор гостей</div><div class="val">19:00</div></div>
       <div><div class="lbl">Место</div><div class="val">Ресторан MEZZE</div><div class="sub">Тюмень, ул. 50 лет Октября, 63Г</div></div>
     </div>
-    <a class="btn outline" href="https://yandex.ru/maps/org/sultan_kebab/189160192992/" target="_blank" rel="noopener" style="margin-top:22px">Открыть карту</a>
+    <a class="btn outline" href="https://yandex.ru/maps/-/CXE-V27b" target="_blank" rel="noopener" style="margin-top:22px">Открыть карту</a>
   </div>
 </section>
 
@@ -474,6 +549,7 @@ footer .tiny{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;colo
 </section>
 
 <footer>
+  <div class="kilim" style="margin-bottom:26px"></div>
   <svg class="orn" style="--dash:120" viewBox="0 0 170 26" fill="none" aria-hidden="true">
     <path d="M0 13h60M110 13h60" stroke="#A11428" stroke-width="1" opacity=".3"/>
     <circle cx="85" cy="13" r="7" stroke="#B9924B" stroke-width="1"/>
